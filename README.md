@@ -10,6 +10,25 @@
 ### 배포 방법
 - 로컬에서 github 업로드
 - EC2에서 github 다운로드
+##### 1. 자바 설치(jdk)
+- sudo apt update
+- sudo apt install openjdk-11-jdk
+
+##### 2. github 배포용 프로젝트 다운로드
+- git clone https://github.com/hansung1908/aws-v1.git
+
+##### 3. gradlew 실행 권한 부여
+- cd ~/aws-v1
+- chmod u+x gradlew
+
+##### 4. gradlew로 프로젝트를 jar로 변경
+- ./gradlew build
+
+##### 5. java로 jar를 실행
+- cd build/libs
+- java -jar *.jar
+
+#####
 - 프로젝트 테스트
 - 프로젝트 빌드
 - nohub 으로 백그라운드 실행
