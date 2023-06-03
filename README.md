@@ -38,6 +38,28 @@
 - 각 로그 파일을 변경하려면 nohup java -jar *.jar 1>log.out 2>err.out &
 - 이유 : 스크립트를 통한 자동화 시 표준 출력과 오류를 분리하기 위해
 
+##### 7. 시간 변경
+- 모든 지역의 시간대 리스트를 볼려면 timedatectl list-timezones
+- 서울 시간대로 변경하려면 sudo timedatectl set-timezone Asia/Seoul
+- 표준 출력 모니터로 출력하려면 echo "안녕"
+
+##### 8. pid 찾기
+- ps -ef | grep *.jar | grep -v grep | awk '{print $2}'
+- pgrep -f *.jar
+- 스프링 종료를 위한 스크립트 작성 vi spring-stop.sh
+- i를 눌러 입력 모드 후 밑에 내용을 작성
+- echo "Springboot Stop....."
+- SPRING_PID=$(pgrep -f *.jar)
+- echo $SPRING_PID
+- kill -9 $SPRING_PID
+- esc로 입력 모드 해제 후 :wq로 저장 후 종료
+- 해당 파일의 실행권한을 주기 위해 chomod u+x spring-stop.sh
+- 실행은 ./spring-stop.sh
+- 변수는 대문자로 작성
+- $변수 - 변수의 값을 실행 혹 출력
+- $(명령어) - 명령어의 결과를 리턴
+
+
 #####
 - 프로젝트 테스트
 - 프로젝트 빌드
