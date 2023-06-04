@@ -59,13 +59,21 @@
 - $변수 - 변수의 값을 실행 혹 출력
 - $(명령어) - 명령어의 결과를 리턴
 
-
-#####
-- 프로젝트 테스트
-- 프로젝트 빌드
-- nohub 으로 백그라운드 실행
-- 오류 로그 남기기 (표준 입출력 리다이렉션)
-- 서버가 종료되면 cron으로 자동 재시작
+##### 9. cron
+- 부하, 에러 등으로 서버 종료 시 자동으로 재시작 할 수 있게 해주는 명령어
+- crontab -e
+- 2번 vim.basic 선택 -> i(insert)
+- #* * * * * ls -l 1>cron.log (#은 제외)
+- 분(0-59) 시간(0-23) 일(1-31) 월(1-12) 요일(0-7)
+- #* 3,4 * * *(새벽 3시와 4시 실행), * 3-6 * * *(새벽 3시부터 6시까지 실행)(#은 제외)
+- vi로 myScript.sh 생성 후 입력
+- crontab -l 1>crontab_new
+- echo "* * * * * /home/ubuntu/job.sh" 1>>crontab_new
+- crontab crontab_new
+- * * * * * /home/ubuntu/job.sh을 crontab_new에 넣고 crontab을 통해 주기적인 실행
+- job.sh 생성 -> ls -l > /home/ubuntu/cron.log
+- cron.log에 현재 폴더 결과를 추가
+- myScript.sh 실행 권한 준 후 실행
 
 ### 고민 1
 - 로컬에서 EC2와 같은 환경을 만들어서 프로젝트를 테스트하고 빌드해서 배포할 수 없을까?
