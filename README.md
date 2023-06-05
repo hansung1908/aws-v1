@@ -63,15 +63,20 @@
 - 부하, 에러 등으로 서버 종료 시 자동으로 재시작 할 수 있게 해주는 명령어
 - crontab -e
 - 2번 vim.basic 선택 -> i(insert)
-- #* * * * * ls -l 1>cron.log (#은 제외)
+- /* * * * * ls -l 1>cron.log (/은 제외)
 - 분(0-59) 시간(0-23) 일(1-31) 월(1-12) 요일(0-7)
 - #* 3,4 * * *(새벽 3시와 4시 실행), * 3-6 * * *(새벽 3시부터 6시까지 실행)(#은 제외)
 - vi로 myScript.sh 생성 후 입력
+- /# 크론탭 내용을 crontab_new 파일로 옮긴다. (/은 제외)
 - crontab -l 1>crontab_new
+- /# crontab_new 파일에 echo의 내용을 추가한다. (/은 제외)
 - echo "* * * * * /home/ubuntu/job.sh" 1>>crontab_new
+- /# crontab에 crontab_new에 작성한 내용을 반영한다. (/은 제외)
 - crontab crontab_new
-- * * * * * /home/ubuntu/job.sh을 crontab_new에 넣고 crontab을 통해 주기적인 실행
-- job.sh 생성 -> ls -l > /home/ubuntu/cron.log
+- /# crontab_new 파일은 삭제한다. (/은 제외)
+- rm crontab_new
+- /* * * * * /home/ubuntu/job.sh을 crontab_new에 넣고 crontab을 통해 주기적인 실행 (/은 제외)
+- job.sh 생성 -> ls -l >> /home/ubuntu/cron.log
 - cron.log에 현재 폴더 결과를 추가
 - myScript.sh 실행 권한 준 후 실행
 
