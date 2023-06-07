@@ -80,6 +80,31 @@
 - cron.log에 현재 폴더 결과를 추가
 - myScript.sh 실행 권한 준 후 실행
 
+##### 10. 재배포 스크립트 생성
+- 스프링 서버 재시작을 위한 파일 생성
+- mkdir cron_restart
+- 서버를 중단하기 위한 스크립트 생성 vi sprint-stop.sh
+- echo "SPRINGBOOT STOP...."
+- SPRING_PID=$(pgrep -f v1-0.0.1-SNAPSHOT.jar)
+- kill -9 $SPRING_PID
+- 권한 부여 후 실행 (서버 종료)
+- 서버를 재시작하기 위한 스크립트 생성 vi sprint-restart.sh
+- SPRING_PID=$(pgrep -f v1-0.0.1-SNAPSHOT.jar)
+- SPRING_PATH="/home/ubuntu/aws-v1/build/libs/v1-0.0.1-SNAPSHOT.jar"
+- echo $SPRING_PID
+- echo $SPRING_PATH
+- if [ -z "$SPRING_PID"]; then (-z - 문자열의 길이가 0이면 참, 반대는 -n)
+-   echo "스프링 종료된 상태...."
+- else
+-   echo "스프링 시작된 상태...."
+- fi
+- 권한 부여 후 실행 (종료된 상태)
+- nohup을 통한 서버 백그라운드 실행
+- nohup java -jar /home/ubuntu/aws-v1/build/libs/v1-0.0.1-SNAPSHOT.jar 1>log.out 2>err.out &
+- 다시 sprint-restart.sh 실행하면 시작된 상태로 
+
+
+
 ### 고민 1
 - 로컬에서 EC2와 같은 환경을 만들어서 프로젝트를 테스트하고 빌드해서 배포할 수 없을까?
 - Docker 가상화 기술
