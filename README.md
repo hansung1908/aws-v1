@@ -28,7 +28,12 @@
 - cd build/libs
 - java -jar *.jar
 
-##### 6. nohup 명령어
+##### 6. 시간 변경
+- 모든 지역의 시간대 리스트를 볼려면 timedatectl list-timezones
+- 서울 시간대로 변경하려면 sudo timedatectl set-timezone Asia/Seoul
+- 표준 출력 모니터로 출력하려면 echo "안녕"
+
+##### 7. nohup 명령어
 - 리눅스에서 프로세스를 실행한 터미널의 세션이 끊어지더라도 지속적으로 동작할 수 있게 해주는 명령어
 - cd aws-v1 -> cd build -> cd libs -> nohup java -jar *.jar
 - 포그라운드에서 실행하면 터미널 종료시 그대로 종료되므로 명령어 끝에 &을 붙혀서 백그라운드에서 실행
@@ -37,11 +42,6 @@
 - 에러 파일 - 2 - nohup.out, 표준 출력 - 1 - nohup.out
 - 각 로그 파일을 변경하려면 nohup java -jar *.jar 1>log.out 2>err.out &
 - 이유 : 스크립트를 통한 자동화 시 표준 출력과 오류를 분리하기 위해
-
-##### 7. 시간 변경
-- 모든 지역의 시간대 리스트를 볼려면 timedatectl list-timezones
-- 서울 시간대로 변경하려면 sudo timedatectl set-timezone Asia/Seoul
-- 표준 출력 모니터로 출력하려면 echo "안녕"
 
 ##### 8. pid 찾기
 - ps -ef | grep *.jar | grep -v grep | awk '{print $2}'
@@ -99,7 +99,23 @@
 - else
 -   echo "스프링 시작된 상태...."
 - fi
-- 권한 부여 후 실행하면 서버 백그라운드 실행 + spring-restart.log에 재시작 시간 
+- 권한 부여 후 실행하면 서버 백그라운드 실행 + spring-restart.log에 재시작 시간 기록
+- vi deploy.sh
+- /# 1. 배포 프로세스 (/은 제외)
+- echo "deploy start... 기존 서버가 시작되어 있다면 종료를 하고 배포를 시작해야함"
+- echo "1. JDK install - x"
+- echo "2. github project download - o"
+- echo "3. gradlew 실행 권한 주기 - o"
+- echo "4. project build  - o"
+- echo "5. ubuntu timezone setting - x"
+- echo "6. nohup으로 springboot 실행시키기 - o"
+- /# 2. 스프링서버 종료시 재시작 (/은 제외)
+- echo "crontab 등록 - spring restart..."
+- crontab -l >crontab_new
+- echo "* * * * * /home/ubuntu/cron_restart/spring-restart.sh" 1>>crontab_new
+- crontab crontab_new
+- rm crontab_new
+- 권한 부여 후 실행하여 서버가 꺼져있는 경우 1분마다 확인하여 spring-restart.sh로 재시
 
 
 
