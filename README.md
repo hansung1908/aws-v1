@@ -10,6 +10,9 @@
 ### 배포 방법
 - 로컬에서 github 업로드
 - EC2에서 github 다운로드
+- 이미 깔려있는데 처음부터 다시 하려면 aws-v1폴더를 통째로 삭제후 배포
+- rm -r /home/ubuntu/aws-v1
+
 ##### 1. 자바 설치(jdk)
 - sudo apt update
 - sudo apt install openjdk-11-jdk
