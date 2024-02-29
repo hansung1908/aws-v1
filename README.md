@@ -1,9 +1,7 @@
 # AWS 배포용 프로젝트
 
-### Springboot
-- devtools
-- springweb
-- lombok
+### java, springboot
+- devtools, springweb, lombok
 
 ### 배포 위치 
 - EC2
